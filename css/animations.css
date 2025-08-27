@@ -1,0 +1,61 @@
+/* Animations for AI Resume Builder page */
+
+/* Hero Section Animations */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+@keyframes floatingMockup {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes particleFloat {
+    0% { transform: translateY(0) translateX(0) scale(0); opacity: 0; }
+    25% { opacity: 0.8; }
+    50% { transform: translateY(-50px) translateX(20px) scale(1); opacity: 0.5; }
+    75% { opacity: 0.8; }
+    100% { transform: translateY(-100px) translateX(40px) scale(0); opacity: 0; }
+}
+
+/* AI Advantage Section Animations */
+@keyframes subtlePulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 0.8; }
+}
+
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4); }
+    100% { box-shadow: 0 0 0 15px rgba(40, 167, 69, 0); }
+}
+
+/* Button Animations */
+@keyframes pulseButton {
+    0% { transform: scale(1); box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4); }
+    50% { transform: scale(1.03); box-shadow: 0 8px 25px rgba(255, 193, 7, 0.6); }
+    100% { transform: scale(1); box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4); }
+}
+
+/* General Fade-in/Slide-up for sections on scroll */
+@keyframes fadeInSlideUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Can be applied to elements with JS using IntersectionObserver */
+.animated-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.animated-fade-in.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* For delayed animations */
+.animated-fade-in.delay-200 { transition-delay: 0.2s; }
+.animated-fade-in.delay-400 { transition-delay: 0.4s; }
+.animated-fade-in.delay-600 { transition-delay: 0.6s; }

@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prijzen Lead Data - Test Sample €36,99 | BuyLeadData</title>
+    <meta name="description" content="Ontdek onze lead data prijzen. Test sample van 1000 data entries voor slechts €36,99. Hoogwaardige B2B leads voor meer klanten.">
+    <meta name="keywords" content="lead data, b2b leads, bedrijfsgegevens, email adressen, prospecting, marktonderzoek, CRM data">
+    <meta name="author" content="BuyLeadData">
+    <meta property="og:title" content="Lead Data Prijzen - Test Sample €36,99 | BuyLeadData">
+    <meta property="og:description" content="Hoogwaardige B2B lead data vanaf €36,99. Direct downloadbaar met bedrijfsgegevens, contactinfo en meer.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.buyleaddata.com/pricing.html">
+    <link rel="canonical" href="https://www.buyleaddata.com/pricing.html">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #0066cc;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero h1 span {
+            color: #ffcc00;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        /* Pricing Section */
+        .pricing-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 10px;
+            padding: 40px 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+        
+        .pricing-card.featured {
+            border: 3px solid #0066cc;
+        }
+        
+        .badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: #ffcc00;
+            color: #333;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .pricing-card h3 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .price {
+            font-size: 48px;
+            font-weight: bold;
+            color: #0066cc;
+            margin: 20px 0;
+        }
+        
+        .price small {
+            font-size: 18px;
+            color: #666;
+            font-weight: normal;
+        }
+        
+        .features {
+            list-style: none;
+            margin: 30px 0;
+        }
+        
+        .features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .features li:before {
+            content: "✓";
+            color: #00cc66;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #0066cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            transition: background 0.3s ease;
+            width: 100%;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn:hover {
+            background: #004499;
+        }
+        
+        .btn-primary {
+            background: #ffcc00;
+            color: #333;
+        }
+        
+        .btn-primary:hover {
+            background: #e6b800;
+        }
+        
+        /* Benefits Section */
+        .benefits {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .benefit-item {
+            text-align: center;
+        }
+        
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background: #e6f2ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+        }
+        
+        .benefit-item h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: #0066cc;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .price {
+                font-size: 36px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="/" class="logo">BuyLeadData</a>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/over-ons.html">Over Ons</a></li>
+                    <li><a href="/pricing.html">Prijzen</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                </ul>
+                <button class="mobile-menu-toggle">☰</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Lead Data Prijzen voor <span>Meer Klanten</span></h1>
+            <p>Hoogwaardige B2B leads voor effectieve prospecting en marktonderzoek</p>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <div class="container">
+            <h2 class="section-title">Transparante Prijzen, Maximale Waarde</h2>
+            <p class="section-subtitle">Kies het pakket dat bij jouw behoeften past. Begin vandaag nog met het genereren van meer leads.</p>
+            
+            <div class="pricing-grid">
+                <!-- Test Sample -->
+                <div class="pricing-card featured">
+                    <span class="badge">POPULAIR</span>
+                    <h3>Test Sample</h3>
+                    <div class="price">
+                        €36,99
+                        <small>/ eenmalig</small>
+                    </div>
+                    <ul class="features">
+                        <li>1.000 data entries</li>
+                        <li>Bedrijfsnaam & adresgegevens</li>
+                        <li>Telefoonnummers</li>
+                        <li>E-mailadressen</li>
+                        <li>Website URLs</li>
+                        <li>Branche informatie</li>
+                        <li>Excel export</li>
+                        <li>Direct te downloaden</li>
+                    </ul>
+                    <a href="mailto:info@buyleaddata.com?subject=Test Sample Bestelling" class="btn btn-primary">Test Sample Bestellen</a>
+                </div>
+
+                <!-- Starter -->
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="price">
+                        €200
+                        <small>/ eenmalig</small>
+                    </div>
+                    <ul class="features">
+                        <li>5.000 data entries</li>
+                        <li>€0,04 per data lijn</li>
+                        <li>Alle Test Sample features</li>
+                        <li>LinkedIn profiel URLs</li>
+                        <li>Beslissersinformatie</li>
+                        <li>API toegang</li>
+                        <li>CRM integraties</li>
+                        <li>E-mail support</li>
+                    </ul>
+                    <a href="mailto:info@buyleaddata.com?subject=Starter Pakket Bestelling" class="btn">Aan de slag</a>
+                </div>
+
+                <!-- Professional -->
+                <div class="pricing-card">
+                    <h3>Professional</h3>
+                    <div class="price">
+                        €750
+                        <small>/ eenmalig</small>
+                    </div>
+                    <ul class="features">
+                        <li>25.000 data entries</li>
+                        <li>€0,03 per data lijn</li>
+                        <li>Alle Starter features</li>
+                        <li>Geavanceerde filters</li>
+                        <li>Real-time data updates</li>
+                        <li>Custom data velden</li>
+                        <li>Prioriteit support</li>
+                        <li>Training & onboarding</li>
+                    </ul>
+                    <a href="mailto:info@buyleaddata.com?subject=Professional Pakket Bestelling" class="btn">Upgrade Nu</a>
+                </div>
+
+                <!-- Mass Bulk -->
+                <div class="pricing-card">
+                    <h3>Mass Bulk</h3>
+                    <div class="price">
+                        €2.000
+                        <small>/ eenmalig</small>
+                    </div>
+                    <ul class="features">
+                        <li>100.000 data entries</li>
+                        <li>€0,02 per data lijn</li>
+                        <li>Alle Professional features</li>
+                        <li>Dedicated account manager</li>
+                        <li>Custom integraties</li>
+                        <li>Bulk processing</li>
+                        <li>Prioriteit levering</li>
+                        <li>24/7 support</li>
+                    </ul>
+                    <a href="mailto:info@buyleaddata.com?subject=Mass Bulk Pakket Bestelling" class="btn">Bestel Mass Bulk</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title">Waarom Kiezen voor BuyLeadData?</h2>
+            <p class="section-subtitle">Ontdek de voordelen van onze hoogwaardige lead data oplossingen</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">📊</div>
+                    <h4>Actuele Data</h4>
+                    <p>Real-time bijgewerkte bedrijfsinformatie voor maximale accuraatheid</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎯</div>
+                    <h4>Targeted Leads</h4>
+                    <p>Precies gefilterde leads op basis van branche, grootte en locatie</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🔗</div>
+                    <h4>CRM Integratie</h4>
+                    <p>Naadloze integratie met HubSpot, Salesforce, Pipedrive en meer</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">💎</div>
+                    <h4>Premium Kwaliteit</h4>
+                    <p>Geverifieerde contactgegevens met hoge deliverability rates</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Klaar om meer klanten te genereren?</h2>
+            <p>Start vandaag nog met onze Test Sample van 1.000 leads voor slechts €36,99</p>
+            <br>
+            <a href="mailto:info@buyleaddata.com?subject=Test Sample Informatie Aanvraag" class="btn" style="background: #ffcc00; color: #333; display: inline-block; width: auto; padding: 15px 40px;">Bestel Test Sample</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 BuyLeadData. Alle rechten voorbehouden.</p>
+                <ul class="footer-links">
+                    <li><a href="/privacy.html">Privacy Policy</a></li>
+                    <li><a href="/voorwaarden.html">Algemene Voorwaarden</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple mobile menu toggle
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '60px';
+            navLinks.style.right = '20px';
+            navLinks.style.background = 'white';
+            navLinks.style.padding = '20px';
+            navLinks.style.borderRadius = '5px';
+            navLinks.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+            navLinks.style.flexDirection = 'column';
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,651 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎲 Universal Resource Fetcher</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        h1 {
+            background: linear-gradient(135deg, #3B82F6, #06B6D4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        
+        .resource-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .tab {
+            background: rgba(59, 130, 246, 0.1);
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            color: #3B82F6;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .tab.active {
+            background: linear-gradient(135deg, #3B82F6, #06B6D4);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #3B82F6, #06B6D4);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+        
+        select, input {
+            padding: 12px 16px;
+            border: 2px solid rgba(59, 130, 246, 0.2);
+            border-radius: 12px;
+            font-size: 14px;
+            background: white;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+        
+        .resource-card {
+            background: white;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-top: 4px solid #3B82F6;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.2);
+        }
+        
+        .resource-preview {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            background: rgba(59, 130, 246, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .resource-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #1F2937;
+        }
+        
+        .resource-type {
+            font-size: 12px;
+            color: #6B7280;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #059669, #047857);
+            font-size: 12px;
+            padding: 8px 16px;
+            margin: 4px;
+            border-radius: 8px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .status {
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 14px;
+        }
+        
+        .status.success {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            color: #065f46;
+            border: 1px solid #10b981;
+        }
+        
+        .status.error {
+            background: linear-gradient(135deg, #fee2e2, #fca5a5);
+            color: #991b1b;
+            border: 1px solid #ef4444;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #6b7280;
+            font-style: italic;
+            padding: 40px;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 12px 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3B82F6;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6B7280;
+        }
+    </style>
+</head>
+<body>
+        <!-- CENTRAL HEADER (Loaded via JS, leveraging iconify-fetcher concept) -->
+    <header id="header-placeholder" role="banner" aria-label="Site Header"></header>
+
+    <main class="flex-shrink-0">
+
+    <div class="container">
+        <h1>🎲 Universal Resource Fetcher</h1>
+        
+        <div class="resource-tabs">
+            <div class="tab active" data-type="icons">🎨 Icons</div>
+            <div class="tab" data-type="images">🖼️ Images</div>
+            <div class="tab" data-type="fonts">📝 Fonts</div>
+            <div class="tab" data-type="colors">🎨 Colors</div>
+            <div class="tab" data-type="quotes">💬 Quotes</div>
+            <div class="tab" data-type="jokes">😄 Jokes</div>
+            <div class="tab" data-type="facts">🧠 Facts</div>
+            <div class="tab" data-type="avatars">👤 Avatars</div>
+        </div>
+        
+        <div class="controls">
+            <select id="categorySelect">
+                <option value="">Choose category...</option>
+            </select>
+            <input type="number" id="resourceCount" value="12" min="1" max="50" placeholder="Count">
+            <button onclick="fetchRandomResources()" id="fetchBtn">🎲 Fetch Random</button>
+            <button onclick="fetchMixedResources()">🌟 Mixed Collection</button>
+            <button onclick="saveCollection()">💾 Save Collection</button>
+        </div>
+        
+        <div class="stats" id="stats"></div>
+        <div id="status"></div>
+        <div id="resourcesContainer"></div>
+    </div>
+
+    <script>
+        // Comprehensive resource database
+        const resourceApis = {
+            icons: {
+                name: 'Icons',
+                apis: [
+                    { name: 'Iconify', url: 'https://api.iconify.design', type: 'svg' },
+                    { name: 'Icons8', url: 'https://img.icons8.com', type: 'png' }
+                ],
+                categories: ['ui', 'brands', 'social', 'arrows', 'devices']
+            },
+            images: {
+                name: 'Images',
+                apis: [
+                    { name: 'Unsplash', url: 'https://picsum.photos', type: 'photo' },
+                    { name: 'Lorem Picsum', url: 'https://picsum.photos', type: 'placeholder' },
+                    { name: 'Placekitten', url: 'https://placekitten.com', type: 'cats' },
+                    { name: 'Dog API', url: 'https://dog.ceo/api/breeds/image/random', type: 'dogs' }
+                ],
+                categories: ['nature', 'technology', 'people', 'abstract', 'animals']
+            },
+            fonts: {
+                name: 'Fonts',
+                apis: [
+                    { name: 'Google Fonts', url: 'https://fonts.googleapis.com/css2', type: 'webfont' }
+                ],
+                categories: ['serif', 'sans-serif', 'display', 'handwriting', 'monospace']
+            },
+            colors: {
+                name: 'Colors',
+                apis: [
+                    { name: 'Color API', url: 'https://www.thecolorapi.com', type: 'palette' },
+                    { name: 'Coolors', url: 'https://coolors.co', type: 'generator' }
+                ],
+                categories: ['palettes', 'gradients', 'material', 'pastel', 'vibrant']
+            },
+            quotes: {
+                name: 'Quotes',
+                apis: [
+                    { name: 'Quotable', url: 'https://api.quotable.io', type: 'inspirational' },
+                    { name: 'Quote Garden', url: 'https://quotegarden.com/api', type: 'famous' }
+                ],
+                categories: ['motivational', 'funny', 'wisdom', 'love', 'success']
+            },
+            jokes: {
+                name: 'Jokes',
+                apis: [
+                    { name: 'JokesAPI', url: 'https://v2.jokeapi.dev', type: 'programming' },
+                    { name: 'Dad Jokes', url: 'https://icanhazdadjoke.com', type: 'dad' }
+                ],
+                categories: ['programming', 'dad', 'puns', 'misc', 'dark']
+            },
+            facts: {
+                name: 'Facts',
+                apis: [
+                    { name: 'Useless Facts', url: 'https://uselessfacts.jsph.pl', type: 'random' },
+                    { name: 'Cat Facts', url: 'https://catfact.ninja', type: 'cats' },
+                    { name: 'Numbers API', url: 'http://numbersapi.com', type: 'numbers' }
+                ],
+                categories: ['random', 'science', 'history', 'animals', 'numbers']
+            },
+            avatars: {
+                name: 'Avatars',
+                apis: [
+                    { name: 'Avatars', url: 'https://avatars.dicebear.com', type: 'generated' },
+                    { name: 'RoboHash', url: 'https://robohash.org', type: 'robots' },
+                    { name: 'Identicon', url: 'https://identicon.org', type: 'geometric' }
+                ],
+                categories: ['human', 'robots', 'animals', 'abstract', 'pixel']
+            }
+        };
+
+        let currentResourceType = 'icons';
+        let fetchedResources = [];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setupTabs();
+            updateCategorySelect();
+            showStats();
+        });
+
+        function setupTabs() {
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    currentResourceType = tab.dataset.type;
+                    updateCategorySelect();
+                    showStats();
+                });
+            });
+        }
+
+        function updateCategorySelect() {
+            const select = document.getElementById('categorySelect');
+            const resource = resourceApis[currentResourceType];
+            
+            select.innerHTML = '<option value="">All categories...</option>';
+            
+            if (resource && resource.categories) {
+                resource.categories.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category;
+                    option.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+                    select.appendChild(option);
+                });
+            }
+        }
+
+        function showStats() {
+            const statsDiv = document.getElementById('stats');
+            const resource = resourceApis[currentResourceType];
+            
+            if (resource) {
+                statsDiv.innerHTML = `
+                    <div class="stat-item">
+                        <div class="stat-number">${resource.apis.length}</div>
+                        <div class="stat-label">APIs Available</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">${resource.categories.length}</div>
+                        <div class="stat-label">Categories</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">${fetchedResources.length}</div>
+                        <div class="stat-label">In Collection</div>
+                    </div>
+                `;
+            }
+        }
+
+        function showStatus(message, type = 'success') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = `<div class="status ${type}">${message}</div>`;
+            
+            if (type === 'success') {
+                setTimeout(() => statusDiv.innerHTML = '', 4000);
+            }
+        }
+
+        async function fetchRandomResources() {
+            const count = parseInt(document.getElementById('resourceCount').value) || 12;
+            const category = document.getElementById('categorySelect').value;
+            
+            showStatus(`🔄 Fetching ${count} random ${currentResourceType}...`, 'success');
+            document.getElementById('resourcesContainer').innerHTML = '<div class="loading">Loading resources...</div>';
+            
+            try {
+                let resources = [];
+                
+                switch(currentResourceType) {
+                    case 'icons':
+                        resources = await fetchIcons(count, category);
+                        break;
+                    case 'images':
+                        resources = await fetchImages(count, category);
+                        break;
+                    case 'fonts':
+                        resources = await fetchFonts(count, category);
+                        break;
+                    case 'colors':
+                        resources = await fetchColors(count, category);
+                        break;
+                    case 'quotes':
+                        resources = await fetchQuotes(count, category);
+                        break;
+                    case 'jokes':
+                        resources = await fetchJokes(count, category);
+                        break;
+                    case 'facts':
+                        resources = await fetchFacts(count, category);
+                        break;
+                    case 'avatars':
+                        resources = await fetchAvatars(count, category);
+                        break;
+                }
+                
+                fetchedResources = resources;
+                displayResources(resources);
+                showStats();
+                showStatus(`✅ Fetched ${resources.length} ${currentResourceType}!`);
+                
+            } catch (error) {
+                showStatus(`❌ Error fetching ${currentResourceType}: ${error.message}`, 'error');
+                document.getElementById('resourcesContainer').innerHTML = '';
+            }
+        }
+
+        // Individual fetch functions
+        async function fetchIcons(count, category) {
+            // Simplified icon fetching (using direct URLs for demo)
+            const icons = [];
+            const iconSets = ['mdi', 'heroicons', 'lucide', 'tabler'];
+            const iconNames = ['home', 'user', 'settings', 'heart', 'star', 'search', 'menu', 'close', 'check', 'arrow-right'];
+            
+            for (let i = 0; i < count; i++) {
+                const set = iconSets[Math.floor(Math.random() * iconSets.length)];
+                const name = iconNames[Math.floor(Math.random() * iconNames.length)];
+                icons.push({
+                    type: 'icon',
+                    name: `${set}:${name}`,
+                    url: `https://api.iconify.design/${set}/${name}.svg`,
+                    preview: `<img src="https://api.iconify.design/${set}/${name}.svg" style="width: 48px; height: 48px;">`,
+                    copyable: `${set}:${name}`
+                });
+            }
+            return icons;
+        }
+
+        async function fetchImages(count, category) {
+            const images = [];
+            for (let i = 0; i < count; i++) {
+                const width = 300;
+                const height = 200;
+                const seed = Math.floor(Math.random() * 1000);
+                images.push({
+                    type: 'image',
+                    name: `Random Image ${i + 1}`,
+                    url: `https://picsum.photos/${width}/${height}?random=${seed}`,
+                    preview: `<img src="https://picsum.photos/200/120?random=${seed}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">`,
+                    copyable: `https://picsum.photos/${width}/${height}?random=${seed}`
+                });
+            }
+            return images;
+        }
+
+        async function fetchColors(count, category) {
+            const colors = [];
+            for (let i = 0; i < count; i++) {
+                const color = '#' + Math.floor(Math.random()*16777215).toString(16);
+                colors.push({
+                    type: 'color',
+                    name: color.toUpperCase(),
+                    url: color,
+                    preview: `<div style="width: 80px; height: 80px; background: ${color}; border-radius: 50%; margin: 0 auto;"></div>`,
+                    copyable: color
+                });
+            }
+            return colors;
+        }
+
+        async function fetchQuotes(count, category) {
+            // Demo quotes
+            const sampleQuotes = [
+                "The only way to do great work is to love what you do. - Steve Jobs",
+                "Innovation distinguishes between a leader and a follower. - Steve Jobs",
+                "Life is what happens to you while you're busy making other plans. - John Lennon",
+                "The future belongs to those who believe in the beauty of their dreams. - Eleanor Roosevelt"
+            ];
+            
+            return Array.from({length: count}, (_, i) => ({
+                type: 'quote',
+                name: `Quote ${i + 1}`,
+                url: '#',
+                preview: `<div style="padding: 20px; font-style: italic; text-align: center; font-size: 14px;">"${sampleQuotes[i % sampleQuotes.length]}"</div>`,
+                copyable: sampleQuotes[i % sampleQuotes.length]
+            }));
+        }
+
+        async function fetchJokes(count, category) {
+            // Demo jokes
+            const jokes = [
+                "Why do programmers prefer dark mode? Because light attracts bugs!",
+                "How many programmers does it take to change a light bulb? None, that's a hardware problem.",
+                "Why do Java developers wear glasses? Because they can't C#!"
+            ];
+            
+            return Array.from({length: count}, (_, i) => ({
+                type: 'joke',
+                name: `Joke ${i + 1}`,
+                url: '#',
+                preview: `<div style="padding: 20px; text-align: center; font-size: 14px;">${jokes[i % jokes.length]}</div>`,
+                copyable: jokes[i % jokes.length]
+            }));
+        }
+
+        async function fetchFacts(count, category) {
+            const facts = [
+                "Honey never spoils. Archaeologists have found edible honey in ancient Egyptian tombs.",
+                "A group of flamingos is called a 'flamboyance'.",
+                "Bananas are berries, but strawberries aren't."
+            ];
+            
+            return Array.from({length: count}, (_, i) => ({
+                type: 'fact',
+                name: `Fact ${i + 1}`,
+                url: '#',
+                preview: `<div style="padding: 20px; text-align: center; font-size: 14px;">${facts[i % facts.length]}</div>`,
+                copyable: facts[i % facts.length]
+            }));
+        }
+
+        async function fetchAvatars(count, category) {
+            const avatars = [];
+            for (let i = 0; i < count; i++) {
+                const seed = Math.random().toString(36).substring(7);
+                avatars.push({
+                    type: 'avatar',
+                    name: `Avatar ${i + 1}`,
+                    url: `https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}`,
+                    preview: `<img src="https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}" style="width: 80px; height: 80px; border-radius: 50%;">`,
+                    copyable: `https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}`
+                });
+            }
+            return avatars;
+        }
+
+        async function fetchFonts(count, category) {
+            const fonts = ['Roboto', 'Open Sans', 'Lato', 'Montserrat', 'Oswald', 'Source Sans Pro'];
+            return Array.from({length: count}, (_, i) => ({
+                type: 'font',
+                name: fonts[i % fonts.length],
+                url: `https://fonts.googleapis.com/css2?family=${fonts[i % fonts.length]}:wght@300;400;700&display=swap`,
+                preview: `<div style="font-family: '${fonts[i % fonts.length]}', sans-serif; font-size: 24px; text-align: center; padding: 20px;">Aa Bb Cc</div>`,
+                copyable: `https://fonts.googleapis.com/css2?family=${fonts[i % fonts.length]}:wght@300;400;700&display=swap`
+            }));
+        }
+
+        function displayResources(resources) {
+            const container = document.getElementById('resourcesContainer');
+            const grid = document.createElement('div');
+            grid.className = 'resources-grid';
+            
+            resources.forEach(resource => {
+                const card = document.createElement('div');
+                card.className = 'resource-card';
+                
+                card.innerHTML = `
+                    <div class="resource-preview">${resource.preview}</div>
+                    <div class="resource-title">${resource.name}</div>
+                    <div class="resource-type">${resource.type}</div>
+                    <button class="copy-btn" onclick="copyToClipboard('${resource.copyable.replace(/'/g, "\\'")}')">Copy</button>
+                    <button class="copy-btn" onclick="copyToClipboard('${resource.url}')">Copy URL</button>
+                `;
+                
+                grid.appendChild(card);
+            });
+            
+            container.innerHTML = '';
+            container.appendChild(grid);
+        }
+
+        async function fetchMixedResources() {
+            showStatus('🌟 Fetching mixed collection...', 'success');
+            const types = Object.keys(resourceApis);
+            const mixed = [];
+            
+            for (const type of types) {
+                currentResourceType = type;
+                try {
+                    const resources = await fetchRandomResources();
+                    // This is simplified - in real implementation, you'd need to properly handle the async nature
+                } catch (error) {
+                    console.warn(`Failed to fetch ${type}:`, error);
+                }
+            }
+        }
+
+        function saveCollection() {
+            if (fetchedResources.length === 0) {
+                showStatus('❌ No resources to save!', 'error');
+                return;
+            }
+            
+            const data = {
+                timestamp: new Date().toISOString(),
+                type: currentResourceType,
+                resources: fetchedResources
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `resources-${currentResourceType}-${Date.now()}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showStatus('✅ Collection saved!');
+        }
+
+        async function copyToClipboard(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                showStatus(`📋 Copied to clipboard!`);
+            } catch (error) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showStatus(`📋 Copied to clipboard!`);
+            }
+        }
+    </script>
+     <script src="/js/script.js" defer></script> <!-- Global utilities, header/footer loading -->
+</body>
+</html>

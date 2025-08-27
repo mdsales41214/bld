@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Met Te Veel Betalen Voor Bedrijfsdiensten | Bespaar Tot €50.000/jaar</title>
+    <meta name="description" content="Vergelijk gratis webhosting, energie en software voor bedrijven. 5000+ ondernemers besparen al. Direct resultaat in 2 minuten.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #ffffff;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Trust Bar */
+        .trust-bar {
+            background: #f8f9fa;
+            padding: 12px 0;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .trust-bar-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .trust-icon {
+            color: #28a745;
+        }
+        
+        /* Hero Section - Above the Fold */
+        .hero {
+            padding: 60px 0;
+            background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .hero-text h1 {
+            font-size: 2.8rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+        
+        .hero-text .highlight {
+            color: #007bff;
+            position: relative;
+        }
+        
+        .hero-text .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #007bff;
+            opacity: 0.3;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #6c757d;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .hero-bullets {
+            list-style: none;
+            margin-bottom: 35px;
+        }
+        
+        .hero-bullets li {
+            padding: 12px 0;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+            color: #495057;
+        }
+        
+        .hero-bullets li::before {
+            content: '✓';
+            color: #28a745;
+            font-weight: bold;
+            font-size: 1.4rem;
+            margin-right: 15px;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .cta-primary {
+            display: inline-block;
+            padding: 18px 40px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+        }
+        
+        .cta-primary:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+        }
+        
+        .cta-secondary {
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .cta-secondary:hover {
+            color: #495057;
+        }
+        
+        .hero-trust {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: #6c757d;
+            font-size: 0.95rem;
+        }
+        
+        .hero-calculator {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+        
+        .calculator-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .calculator-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+        
+        .calculator-subtitle {
+            color: #6c757d;
+        }
+        
+        .calculator-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #495057;
+        }
+        
+        .form-input {
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        
+        .calculator-result {
+            background: #e7f3ff;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .result-label {
+            font-size: 1rem;
+            color: #495057;
+            margin-bottom: 10px;
+        }
+        
+        .result-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #007bff;
+        }
+        
+        .calculator-cta {
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        /* Social Proof Section */
+        .social-proof {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px 0;
+        }
+        
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+        
+        .proof-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .proof-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 5px;
+        }
+        
+        .proof-label {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+        
+        /* Problem-Solution Section */
+        .problem-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+        
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .problem-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .problem-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        
+        .problem-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+        
+        .problem-description {
+            color: #6c757d;
+            line-height: 1.6;
+        }
+        
+        /* Solution Showcase */
+        .solution-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .solution-content h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+        
+        .solution-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .solution-features li {
+            padding: 15px 0;
+            display: flex;
+            align-items: start;
+            gap: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .solution-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-icon {
+            color: #28a745;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .feature-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: #1a1a1a;
+        }
+        
+        .feature-content p {
+            color: #6c757d;
+            font-size: 0.95rem;
+        }
+        
+        .solution-visual {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        /* Tools Section */
+        .tools-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .tools-grid {
+            display: grid;
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .tool-box {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .testimonial-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .testimonial-stars {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: #495057;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .author-info h4 {
+            font-size: 1rem;
+            margin-bottom: 3px;
+            color: #1a1a1a;
+        }
+        
+        .author-info p {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        /* Simple CTA Section */
+        .final-cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .final-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .final-cta p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+        
+        .cta-button-white {
+            display: inline-block;
+            padding: 18px 50px;
+            background: white;
+            color: #007bff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-button-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .cta-guarantee {
+            margin-top: 20px;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            
+            .proof-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .problem-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .solution-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-calculator {
+                margin-top: 40px;
+            }
+        }
+        
+        /* Loading animation */
+        .calculating {
+            display: inline-block;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="container">
+            <div class="trust-bar-content">
+                <span class="trust-item">
+                    <span class="trust-icon">🔒</span>
+                    100% Veilig & Vertrouwd
+                </span>
+                <span class="trust-item">
+                    <span class="trust-icon">✓</span>
+                    Geen verplichtingen
+                </span>
+                <span class="trust-item">
+                    <span class="trust-icon">⚡</span>
+                    Resultaat in 2 minuten
+                </span>
+                <span class="trust-item">
+                    <span class="trust-icon">🏆</span>
+                    5000+ bedrijven geholpen
+                </span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Uw Bedrijf Betaalt <span class="highlight">€12.000 Tot €50.000</span> Te Veel Per Jaar</h1>
+                    <p class="hero-subtitle">
+                        Ontdek in 2 minuten hoeveel u kunt besparen op webhosting, energie en bedrijfssoftware - zonder gedoe met offertes
+                    </p>
+                    
+                    <ul class="hero-bullets">
+                        <li>Directe vergelijking van 50+ leveranciers</li>
+                        <li>Gemiddeld 35% besparing op vaste kosten</li>
+                        <li>Wij regelen de complete overstap</li>
+                    </ul>
+                    
+                    <div class="hero-cta">
+                        <a href="#calculator" class="cta-primary">
+                            Bereken Uw Besparing →
+                        </a>
+                        <a href="#how-it-works" class="cta-secondary">
+                            Hoe werkt het? <span>↓</span>
+                        </a>
+                    </div>
+                    
+                    <div class="hero-trust">
+                        <span>⭐⭐⭐⭐⭐</span>
+                        <span>4.8/5 score uit 500+ reviews</span>
+                    </div>
+                </div>
+                
+                <div class="hero-calculator" id="calculator">
+                    <div class="calculator-header">
+                        <h2 class="calculator-title">Quick Scan Besparingen</h2>
+                        <p class="calculator-subtitle">Zie direct uw potentiële besparing</p>
+                    </div>
+                    
+                    <form class="calculator-form" id="savings-calculator">
+                        <div class="form-group">
+                            <label class="form-label">Aantal medewerkers</label>
+                            <input type="number" class="form-input" id="employees" placeholder="bijv. 25" value="10">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Huidige maandkosten (schatting)</label>
+                            <input type="number" class="form-input" id="monthly-costs" placeholder="bijv. €5000" value="5000">
+                        </div>
+                        
+                        <div class="calculator-result">
+                            <p class="result-label">Geschatte jaarlijkse besparing:</p>
+                            <p class="result-amount" id="savings-amount">€21.000</p>
+                        </div>
+                        
+                        <a href="#tools" class="cta-primary calculator-cta">
+                            Start Gratis Vergelijking
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Social Proof Bar -->
+    <section class="social-proof">
+        <div class="container">
+            <div class="proof-grid">
+                <div class="proof-item">
+                    <div class="proof-number">€50K+</div>
+                    <div class="proof-label">Gem. besparing/jaar</div>
+                </div>
+                <div class="proof-item">
+                    <div class="proof-number">5.000+</div>
+                    <div class="proof-label">Bedrijven geholpen</div>
+                </div>
+                <div class="proof-item">
+                    <div class="proof-number">24 uur</div>
+                    <div class="proof-label">Overstaptijd</div>
+                </div>
+                <div class="proof-item">
+                    <div class="proof-number">100%</div>
+                    <div class="proof-label">Gratis service</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Problem Section -->
+    <section class="problem-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Herkent U Deze Frustraties?</h2>
+                <p class="section-subtitle">
+                    De meeste bedrijven worstelen met dezelfde problemen als het gaat om hun vaste lasten
+                </p>
+            </div>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">📈</div>
+                    <h3 class="problem-title">Stijgende Kosten</h3>
+                    <p class="problem-description">
+                        Elk jaar worden services duurder, maar krijgt u er ook meer voor terug? Waarschijnlijk niet.
+                    </p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">⏰</div>
+                    <h3 class="problem-title">Geen Tijd</h3>
+                    <p class="problem-description">
+                        Offertes opvragen, vergelijken, onderhandelen... Wie heeft daar tijd voor als ondernemer?
+                    </p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">🤔</div>
+                    <h3 class="problem-title">Onduidelijke Markt</h3>
+                    <p class="problem-description">
+                        Tientallen aanbieders, allemaal claimen ze de beste te zijn. Hoe maakt u de juiste keuze?
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Solution Section -->
+    <section class="solution-section" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Zo Simpel Kan Het Zijn</h2>
+                <p class="section-subtitle">
+                    Wij hebben het vergelijken en overstappen volledig geautomatiseerd
+                </p>
+            </div>
+            
+            <div class="solution-grid">
+                <div class="solution-content">
+                    <h3>In 4 Stappen Naar Lagere Kosten</h3>
+                    
+                    <ul class="solution-features">
+                        <li>
+                            <span class="feature-icon">1️⃣</span>
+                            <div class="feature-content">
+                                <h4>Kies Uw Dienst</h4>
+                                <p>Selecteer wat u wilt vergelijken: hosting, energie of software</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="feature-icon">2️⃣</span>
+                            <div class="feature-content">
+                                <h4>Vul Basisgegevens In</h4>
+                                <p>Enkele vragen over uw huidige situatie (duurt max 2 minuten)</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="feature-icon">3️⃣</span>
+                            <div class="feature-content">
+                                <h4>Ontvang Direct Resultaat</h4>
+                                <p>Zie alle opties overzichtelijk op prijs, service en voorwaarden</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="feature-icon">4️⃣</span>
+                            <div class="feature-content">
+                                <h4>Wij Regelen De Overstap</h4>
+                                <p>Inclusief opzegging huidige contract - u merkt er niets van</p>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <a href="#tools" class="cta-primary">
+                        Start Nu Met Vergelijken
+                    </a>
+                </div>
+                
+                <div class="solution-visual">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect x='50' y='50' width='300' height='200' fill='%23007bff' opacity='0.1' rx='10'/%3E%3Crect x='70' y='70' width='260' height='40' fill='%23007bff' opacity='0.2' rx='5'/%3E%3Crect x='70' y='120' width='260' height='40' fill='%2328a745' opacity='0.2' rx='5'/%3E%3Crect x='70' y='170' width='260' height='40' fill='%23ffc107' opacity='0.2' rx='5'/%3E%3Ctext x='200' y='240' text-anchor='middle' font-family='Arial' font-size='18' fill='%236c757d'%3EVergelijkingsresultaat%3C/text%3E%3C/svg%3E" alt="Vergelijkingstool visualisatie" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Tools Section -->
+    <section class="tools-section" id="tools">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Kies Uw Vergelijkingstool</h2>
+                <p class="section-subtitle">
+                    Direct toegang tot alle zakelijke vergelijkers - 100% gratis en zonder verplichtingen
+                </p>
+            </div>
+            
+            <div class="tools-grid">
+                <!-- Hosting Tool -->
+                <div class="tool-box">
+                    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 40px; align-items: center;">
+                        <div>
+                            <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: #1a1a1a;">
+                                🚀 Webhosting Vergelijker
+                            </h3>
+                            <p style="color: #6c757d; margin-bottom: 20px; line-height: 1.6;">
+                                Bespaar tot 70% op hosting. Vergelijk shared, VPS en dedicated servers.
+                            </p>
+                            <a href="https://jf79.net/c/?si=16780&li=1722914&wi=409718&ws=&dl=nl" class="cta-primary" style="display: inline-block;">
+                                Start Vergelijking →
+                            </a>
+                        </div>
+                        <div style="background: #f8f9fa; padding: 30px; border-radius: 12px;">
+                            <p style="text-align: center; color: #6c757d;">
+                                <strong>Populair bij:</strong> E-commerce, SaaS, Corporate websites<br>
+                                <strong>Besparing:</strong> €2.000 - €15.000 per jaar
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Energy Tool -->
+                <div class="tool-box">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: #1a1a1a; text-align: center;">
+                        ⚡ Zakelijke Energie Vergelijker
+                    </h3>
+                    <script type="text/javascript" src="https://daisycon.tools/energy-nl/app.js"></script>
+                    <div class="dc-tool dc-energy-tool" data-config='{"mediaId":409718,"locale":"nl-NL","buttonText":"Vergelijk Energietarieven"}'></div>
+                </div>
+                
+                <!-- Accounting Tool -->
+                <div class="tool-box">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: #1a1a1a; text-align: center;">
+                        📊 Boekhoudsoftware Vergelijker
+                    </h3>
+                    <script type="text/javascript" src="https://daisycon.tools/accounting/app.js"></script>
+                    <div class="dc-tool dc-accounting-tool" data-config='{"mediaId":409718,"locale":"nl-NL","language":"nl","limit":25,"showFilters":true,"filter":{"amountPeriod":{"value":["month"]},"companyType":{"value":["startup"]},"freePackage":{"value":true},"option":{"value":null},"program":{"value":null},"type":{"value":["accounting_billing"]},"users":{"min":1,"max":25}}}'></div>
+                </div>
+                
+                <!-- All-in-One Tool -->
+                <div class="tool-box">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: #1a1a1a; text-align: center;">
+                        🔧 Alles-in-één Zakelijke Diensten
+                    </h3>
+                    <script type="text/javascript" src="https://daisycon.tools/all-in-one/app.js"></script>
+                    <div class="dc-tool dc-all-in-one-tool" data-config='{"mediaId":409718,"language":"nl","showFilters":true,"limit":25}'></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Wat Anderen Zeggen</h2>
+                <p class="section-subtitle">
+                    Echte resultaten van echte ondernemers
+                </p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        "In 10 minuten €8.500 per jaar bespaard op onze hosting. Hadden we dit maar eerder geweten!"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MV</div>
+                        <div class="author-info">
+                            <h4>Mark Verhoeven</h4>
+                            <p>CEO, TechStart BV</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        "De energie vergelijker liet zien dat we 40% teveel betaalden. Overstap was binnen een week geregeld."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SB</div>
+                        <div class="author-info">
+                            <h4>Sandra Bakker</h4>
+                            <p>Finance Manager, ProductieBedrijf</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        "Sceptisch over gratis diensten, maar dit werkt echt. €15K bespaard zonder gedoe met salespeople."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PJ</div>
+                        <div class="author-info">
+                            <h4>Peter Jansen</h4>
+                            <p>Eigenaar, Jansen Logistics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>Stop Met Geld Weggooien</h2>
+            <p>Elke dag uitstel kost u letterlijk geld. Start nu en bespaar direct.</p>
+            <a href="#tools" class="cta-button-white">
+                Ja, Ik Wil Besparen
+            </a>
+            <p class="cta-guarantee">
+                ✓ 100% Gratis ✓ Geen Verplichtingen ✓ Resultaat in 2 Minuten
+            </p>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Algemene Voorwaarden</a>
+                <a href="#">Contact</a>
+                <a href="#">Over Ons</a>
+            </div>
+            <p style="opacity: 0.7; font-size: 0.9rem;">
+                © 2024 BuyLeadData.com - Zakelijke Vergelijkers Nederland
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Calculator functionality
+        const calculator = document.getElementById('savings-calculator');
+        const employeesInput = document.getElementById('employees');
+        const costsInput = document.getElementById('monthly-costs');
+        const savingsDisplay = document.getElementById('savings-amount');
+        
+        function calculateSavings() {
+            const employees = parseInt(employeesInput.value) || 10;
+            const monthlyCosts = parseInt(costsInput.value) || 5000;
+            
+            // Calculate savings (35% average)
+            const yearlyCosts = monthlyCosts * 12;
+            const savings = Math.round(yearlyCosts * 0.35);
+            
+            // Animate the number
+            savingsDisplay.classList.add('calculating');
+            setTimeout(() => {
+                savingsDisplay.textContent = `€${savings.toLocaleString('nl-NL')}`;
+                savingsDisplay.classList.remove('calculating');
+            }, 500);
+        }
+        
+        // Update calculation on input
+        employeesInput.addEventListener('input', calculateSavings);
+        costsInput.addEventListener('input', calculateSavings);
+        
+        // Initial calculation
+        calculateSavings();
+        
+        // Track scroll depth
+        let maxScroll = 0;
+        window.addEventListener('scroll', () => {
+            const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            if (scrollPercentage > maxScroll) {
+                maxScroll = scrollPercentage;
+            }
+        });
+    </script>
+</body>
+</html>

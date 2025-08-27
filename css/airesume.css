@@ -1,0 +1,928 @@
+/* Custom styles for the AI Resume Builder landing page */
+
+/* ==========================================================================
+   Global and Utility Styles (Expanding on buyleaddata.com's approach)
+   These would ideally be defined in central-styles.css or variables.css
+   but are included here for completeness of custom properties used.
+   ========================================================================== */
+
+/* Define Custom Properties (CSS Variables) for consistent theming */
+:root {
+    --gogo-primary-blue: #007bff; /* Original primary blue */
+    --gogo-secondary-blue: #0056b3; /* Darker blue for gradients */
+    --gogo-success-green: #28a745; /* Original success green */
+    --gogo-success-dark: #218838; /* Darker success green */
+    --gogo-warning-yellow: #ffc107; /* Warning yellow */
+    --gogo-warning-dark: #e0a800; /* Darker warning yellow */
+    --gogo-light-grey: #f8f9fa; /* Light background */
+    --gogo-medium-grey: #e9ecef; /* Medium background */
+    --gogo-dark-text: #212529; /* Default dark text */
+    --gogo-light-text: #f1f1f1; /* Light text on dark backgrounds */
+
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    --section-padding-y: 6rem; /* Consistent vertical padding for sections */
+    --border-radius-base: 0.5rem;
+    --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --shadow-md: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--gogo-light-grey);
+    color: var(--gogo-dark-text);
+    overflow-x: hidden; /* Prevent horizontal scroll from animations */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--gogo-dark-text);
+    line-height: 1.2;
+}
+
+section {
+    padding-top: var(--section-padding-y);
+    padding-bottom: var(--section-padding-y);
+}
+
+.gradient-text-animated {
+    background: linear-gradient(90deg, var(--gogo-primary-blue), var(--gogo-success-green), var(--gogo-primary-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    animation: gradientShift 4s linear infinite; /* Defined in animations.css */
+}
+
+.highlight-ai {
+    color: var(--gogo-success-green);
+    text-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+}
+
+/* ==========================================================================
+   Hero Section - Enhanced
+   ========================================================================== */
+.hero-ai-resume {
+    position: relative;
+    background: linear-gradient(135deg, var(--gogo-primary-blue), var(--gogo-secondary-blue));
+    color: var(--gogo-light-text);
+    padding-top: calc(var(--section-padding-y) + 4rem); /* Adjust for potential fixed header */
+    padding-bottom: calc(var(--section-padding-y) + 4rem);
+    min-height: 80vh; /* Responsive minimum height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Keep particles within */
+}
+
+.hero-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Subtle dark overlay for text contrast */
+    z-index: 1;
+}
+
+.hero-content-wrapper {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-text-area {
+    margin-bottom: 3rem;
+}
+
+.hero-ai-resume h1 {
+    font-size: 4.5rem; /* Larger for impact */
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    font-weight: 900; /* Use Space Grotesk's heavier weight */
+}
+
+.hero-ai-resume .lead {
+    font-size: 1.6rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    line-height: 1.6;
+}
+
+.hero-cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem; /* Space between buttons */
+    margin-top: 2rem;
+}
+
+.btn-success-custom-animated {
+    background-color: var(--gogo-success-green);
+    border-color: var(--gogo-success-green);
+    color: white;
+    padding: 1.2rem 2.8rem;
+    font-size: 1.4rem;
+    border-radius: var(--border-radius-base);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+}
+.btn-success-custom-animated::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    transition: all 0.75s ease-out;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: -1;
+}
+.btn-success-custom-animated:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+.btn-success-custom-animated:hover {
+    background-color: var(--gogo-success-dark);
+    border-color: var(--gogo-success-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.6);
+}
+
+.btn-outline-light-custom {
+    color: var(--gogo-light-text);
+    border-color: var(--gogo-light-text);
+    background-color: transparent;
+    padding: 1.2rem 2.8rem;
+    font-size: 1.4rem;
+    border-radius: var(--border-radius-base);
+    transition: all 0.3s ease;
+}
+.btn-outline-light-custom:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--gogo-light-text);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+}
+
+.hero-image-area {
+    position: relative;
+    margin-top: 4rem;
+    /* max-width: 700px; */ /* Adjust as needed */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-mockup-animation {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-base);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: floatingMockup 3s ease-in-out infinite; /* Defined in animations.css */
+}
+
+/* AI Brain Particles (simple version, more complex in JS) */
+.ai-brain-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+.ai-brain-particles .particle {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    animation: particleFloat 10s infinite ease-in-out; /* Defined in animations.css */
+    opacity: 0;
+}
+.ai-brain-particles .p1 { width: 10px; height: 10px; top: 10%; left: 20%; animation-delay: 0s; }
+.ai-brain-particles .p2 { width: 15px; height: 15px; top: 70%; left: 80%; animation-delay: 2s; }
+.ai-brain-particles .p3 { width: 8px; height: 8px; top: 40%; left: 50%; animation-delay: 4s; }
+/* Add more particles as needed, each with unique delay and position */
+
+
+.wave-divider {
+    position: absolute;
+    bottom: -1px; /* Align perfectly */
+    left: 0;
+    width: 100%;
+    height: 100px; /* Height of the wave */
+    overflow: hidden;
+    z-index: 2; /* Above background but below content */
+}
+.wave-divider svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.wave-divider path {
+    fill: var(--gogo-light-grey); /* Match background of next section */
+}
+
+@media (min-width: 992px) {
+    .hero-content-wrapper {
+        flex-direction: row;
+        text-align: left;
+        align-items: center;
+        gap: 5rem;
+    }
+    .hero-text-area {
+        margin-bottom: 0;
+        flex: 1;
+    }
+    .hero-image-area {
+        flex: 1;
+        margin-top: 0;
+        justify-content: flex-end;
+    }
+    .hero-ai-resume h1 {
+        font-size: 5rem;
+    }
+    .hero-ai-resume .lead {
+        font-size: 1.75rem;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .hero-cta-group {
+        justify-content: flex-start;
+    }
+}
+
+
+/* ==========================================================================
+   Features Section - Dynamic Showcase
+   ========================================================================== */
+.features-showcase {
+    background-color: var(--gogo-light-grey);
+}
+
+.features-showcase .display-4 {
+    font-weight: 800;
+    margin-bottom: 4rem;
+}
+
+.feature-grid-enhanced {
+    gap: 2.5rem; /* More spacing in the grid */
+}
+
+.feature-card-enhanced {
+    background-color: #fff;
+    border: none; /* Rely on shadow for depth */
+    border-radius: var(--border-radius-base);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%; /* Ensure cards are same height in a row */
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Align content to top */
+    padding: 2.5rem !important; /* Increase padding */
+    text-align: center;
+}
+
+.feature-card-enhanced:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-md);
+}
+
+.feature-card-enhanced .icon-wrapper {
+    background-color: rgba(var(--gogo-primary-blue-rgb), 0.1); /* Light background for icon */
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    border: 2px solid rgba(var(--gogo-primary-blue-rgb), 0.2);
+}
+
+.feature-card-enhanced .feature-icon {
+    width: 40px;
+    height: 40px;
+    color: var(--gogo-primary-blue);
+    stroke-width: 2.5; /* Thicker stroke for icons */
+}
+
+.feature-card-enhanced h3 {
+    color: var(--gogo-dark-text);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.feature-card-enhanced p {
+    color: var(--gogo-dark-text);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   How It Works Section - Interactive Timeline
+   ========================================================================== */
+.how-it-works-timeline {
+    background-color: var(--gogo-medium-grey);
+    padding-bottom: calc(var(--section-padding-y) + 3rem); /* Extra space at bottom */
+}
+
+.how-it-works-timeline .display-4 {
+    font-weight: 800;
+    margin-bottom: 5rem;
+    color: var(--gogo-dark-text);
+}
+
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px; /* Ensure content is not too close to edges */
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: var(--gogo-primary-blue);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -2px;
+    z-index: 0; /* Keep line behind cards */
+    border-radius: 2px;
+}
+
+.timeline-item {
+    padding: 10px 0;
+    position: relative;
+    width: 50%;
+    opacity: 0; /* Hidden by default, animated by JS */
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.timeline-item.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.timeline-item:nth-child(odd) {
+    left: 0;
+    padding-right: 30px;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+    padding-left: 30px;
+}
+
+.timeline-icon {
+    width: 50px;
+    height: 50px;
+    background-color: var(--gogo-primary-blue);
+    color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%; /* Center vertically on the line */
+    transform: translateY(-50%) translateX(-50%); /* Adjust for left/right */
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 4px solid var(--gogo-light-grey); /* Inner border for contrast */
+}
+.timeline-item:nth-child(odd) .timeline-icon {
+    right: -25px; /* Position icon on the line */
+}
+.timeline-item:nth-child(even) .timeline-icon {
+    left: -25px; /* Position icon on the line */
+}
+
+
+.timeline-content {
+    background-color: #fff;
+    border-radius: var(--border-radius-base);
+    box-shadow: var(--shadow-sm);
+    padding: 2rem;
+    min-height: 150px; /* Ensure some height for content */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.timeline-content h3 {
+    color: var(--gogo-primary-blue);
+    margin-bottom: 0.5rem;
+}
+
+/* Mobile Responsiveness for Timeline */
+@media (max-width: 768px) {
+    .timeline::after {
+        left: 20px; /* Move line to the left */
+        margin-left: 0;
+    }
+    .timeline-item {
+        width: 100%;
+        padding-left: 50px; /* Make space for icon */
+        padding-right: 15px;
+        left: 0 !important; /* Force all items to the left */
+    }
+    .timeline-item:nth-child(odd) .timeline-icon,
+    .timeline-item:nth-child(even) .timeline-icon {
+        left: 20px; /* Align all icons to the new line position */
+        right: auto;
+        transform: translateY(-50%) translateX(-50%); /* Reset transform */
+    }
+}
+
+/* ==========================================================================
+   AI Advantage Section - Deep Dive into Technology
+   ========================================================================== */
+.ai-advantage-section {
+    background: linear-gradient(135deg, var(--gogo-secondary-blue) 0%, var(--gogo-primary-blue) 100%);
+    color: var(--gogo-light-text);
+    position: relative;
+    overflow: hidden;
+}
+.ai-advantage-section::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+    animation: subtlePulse 5s infinite ease-in-out; /* Defined in animations.css */
+}
+.ai-advantage-section::after {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(40,167,69,0.15) 0%, rgba(40,167,69,0) 70%);
+    border-radius: 50%;
+    animation: subtlePulse 7s infinite ease-in-out reverse; /* Defined in animations.css */
+}
+
+
+.ai-advantage-section .display-4 {
+    color: var(--gogo-light-text); /* Ensure headings are white */
+    font-weight: 800;
+}
+
+.ai-advantage-section .text-primary-light {
+    color: var(--gogo-warning-yellow) !important; /* Highlight for AI Advantage */
+    text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+}
+
+.ai-advantage-section .lead {
+    font-size: 1.25rem;
+    line-height: 1.6;
+}
+
+.ai-features-list li {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: flex-start;
+}
+.ai-features-list li i {
+    font-size: 1.4rem;
+    margin-top: 0.2rem;
+}
+
+.btn-warning-custom {
+    background-color: var(--gogo-warning-yellow);
+    border-color: var(--gogo-warning-yellow);
+    color: var(--gogo-dark-text); /* Dark text on yellow */
+    padding: 1rem 2.5rem;
+    font-size: 1.25rem;
+    border-radius: var(--border-radius-base);
+    transition: all 0.3s ease;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+}
+.btn-warning-custom:hover {
+    background-color: var(--gogo-warning-dark);
+    border-color: var(--gogo-warning-dark);
+    color: var(--gogo-dark-text);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 193, 7, 0.6);
+}
+
+.ai-visualization-card {
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius-base);
+    backdrop-filter: blur(5px); /* Frosted glass effect */
+    box-shadow: var(--shadow-lg);
+    padding: 2.5rem !important;
+}
+
+.ai-flow-diagram {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.flow-step {
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--gogo-light-text);
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--border-radius-base);
+    font-size: 0.9rem;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.flow-step i {
+    font-size: 1.2rem;
+}
+.ai-core-animated {
+    background-color: rgba(var(--gogo-success-green-rgb), 0.2);
+    border-color: rgba(var(--gogo-success-green-rgb), 0.5);
+    animation: pulseGlow 2s infinite ease-in-out alternate; /* Defined in animations.css */
+}
+
+/* ==========================================================================
+   Templates Section - Gallery
+   ========================================================================== */
+.templates-gallery {
+    background-color: var(--gogo-light-grey);
+}
+
+.templates-gallery .display-4 {
+    font-weight: 800;
+    margin-bottom: 4rem;
+}
+
+.template-filters {
+    margin-bottom: 3rem;
+}
+.template-filters .btn {
+    margin: 0 0.5rem;
+    min-width: 120px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50px; /* Pill shape */
+    transition: all 0.3s ease;
+    border: 2px solid var(--gogo-primary-blue);
+    color: var(--gogo-primary-blue);
+    background-color: transparent;
+}
+.template-filters .btn.active,
+.template-filters .btn:hover {
+    background-color: var(--gogo-primary-blue);
+    color: white;
+    box-shadow: var(--shadow-sm);
+}
+
+.template-grid-dynamic {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 2.5rem;
+}
+
+.template-card {
+    border: none;
+    border-radius: var(--border-radius-base);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.template-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.template-card img {
+    width: 100%;
+    height: 320px; /* Fixed height for consistency */
+    object-fit: cover; /* Cover instead of contain for filling area */
+    border-bottom: 1px solid #eee;
+    transition: transform 0.4s ease;
+}
+.template-card:hover img {
+    transform: scale(1.05); /* Subtle zoom effect */
+}
+
+.template-card .card-body {
+    padding: 1.5rem;
+}
+.template-card .card-title {
+    color: var(--gogo-dark-text);
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+.template-card .card-text {
+    font-size: 0.85rem;
+    min-height: 40px; /* Ensure consistent text height */
+}
+
+.btn-primary-custom {
+    background-color: var(--gogo-primary-blue);
+    border-color: var(--gogo-primary-blue);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    border-radius: var(--border-radius-base);
+    transition: all 0.3s ease;
+}
+.btn-primary-custom:hover {
+    background-color: var(--gogo-secondary-blue);
+    border-color: var(--gogo-secondary-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+/* ==========================================================================
+   Testimonials Section
+   ========================================================================== */
+.testimonials-section {
+    background: linear-gradient(180deg, var(--gogo-medium-grey) 0%, rgba(255,255,255,0) 100%); /* Subtle top gradient */
+    background-color: var(--gogo-light-grey);
+}
+
+.testimonials-section .display-4 {
+    font-weight: 800;
+    margin-bottom: 4rem;
+}
+
+.testimonial-card {
+    background-color: #fff;
+    border: none;
+    border-radius: var(--border-radius-base);
+    box-shadow: var(--shadow-md);
+    padding: 2.5rem !important;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    height: 100%; /* Ensure same height */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-avatar {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border: 5px solid var(--gogo-primary-blue);
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 0 2px white; /* Inner white border */
+}
+
+.testimonial-card .lead {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--gogo-dark-text);
+    margin-bottom: 1rem;
+    font-style: italic; /* Emphasize quotes */
+}
+
+.star-rating i {
+    color: var(--gogo-warning-yellow);
+    font-size: 1.2rem;
+}
+
+.testimonial-carousel-container {
+    padding-bottom: 2rem; /* Space before the 'Read More' button */
+}
+
+/* ==========================================================================
+   FAQ Section - Accordion
+   ========================================================================== */
+.faq-section {
+    background-color: var(--gogo-medium-grey);
+}
+
+.faq-section .display-4 {
+    font-weight: 800;
+    margin-bottom: 4rem;
+}
+
+.accordion-item {
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius-base);
+    overflow: hidden; /* For border-radius */
+    box-shadow: var(--shadow-sm);
+}
+.accordion-item:last-child {
+    margin-bottom: 0;
+}
+
+.accordion-button {
+    background-color: #fff;
+    color: var(--gogo-dark-text);
+    font-weight: 600;
+    font-size: 1.15rem;
+    padding: 1.5rem;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.accordion-button:not(.collapsed) {
+    background-color: var(--gogo-primary-blue);
+    color: white;
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+}
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(var(--gogo-primary-blue-rgb), 0.25);
+}
+.accordion-button::after {
+    filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg); /* Bootstrap icon color adjust */
+}
+.accordion-button:not(.collapsed)::after {
+    filter: invert(1) grayscale(100%); /* White icon when expanded */
+}
+
+.accordion-body {
+    padding: 1.5rem;
+    background-color: #fefefe;
+    color: var(--gogo-dark-text);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* ==========================================================================
+   Final Call to Action Section
+   ========================================================================== */
+.cta-section-final {
+    background: linear-gradient(45deg, var(--gogo-secondary-blue) 0%, var(--gogo-primary-blue) 100%);
+    color: var(--gogo-light-text);
+    position: relative;
+    overflow: hidden;
+    border-top: 5px solid var(--gogo-success-green); /* Strong separator */
+}
+.cta-section-final::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top left, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+.cta-section-final::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at bottom right, rgba(40,167,69,0.08) 0%, rgba(40,167,69,0) 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.cta-section-final .display-3 {
+    font-weight: 900;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    position: relative;
+    z-index: 1;
+}
+.cta-section-final .lead {
+    font-size: 1.4rem;
+    max-width: 850px;
+    margin: 0 auto 3rem auto;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-warning-custom-animated {
+    background-color: var(--gogo-warning-yellow);
+    border-color: var(--gogo-warning-yellow);
+    color: var(--gogo-dark-text);
+    padding: 1.4rem 3.5rem;
+    font-size: 1.6rem;
+    border-radius: 50px; /* More rounded, pill shape */
+    transition: all 0.3s ease;
+    font-weight: bold;
+    box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+    animation: pulseButton 2s infinite ease-in-out; /* Defined in animations.css */
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+.btn-warning-custom-animated:hover {
+    background-color: var(--gogo-warning-dark);
+    border-color: var(--gogo-warning-dark);
+    color: var(--gogo-dark-text);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(255, 193, 7, 0.6);
+}
+.btn-warning-custom-animated.glow-on-hover::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 50%;
+    transition: width 0.4s ease, height 0.4s ease;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+.btn-warning-custom-animated.glow-on-hover:hover::before {
+    width: 200%;
+    height: 200%;
+}
+
+/* ==========================================================================
+   Responsive Adjustments (General)
+   ========================================================================== */
+@media (max-width: 767.98px) {
+    .hero-ai-resume h1 {
+        font-size: 3rem;
+    }
+    .hero-ai-resume .lead {
+        font-size: 1.1rem;
+    }
+    .hero-cta-group {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .btn-success-custom-animated,
+    .btn-outline-light-custom,
+    .btn-warning-custom,
+    .btn-warning-custom-animated {
+        width: 100%;
+        font-size: 1.1rem;
+        padding: 1rem 1.5rem;
+    }
+
+    .display-4, .display-3 {
+        font-size: 2.5rem;
+    }
+    .display-2 {
+        font-size: 3rem;
+    }
+
+    .section {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    .feature-card-enhanced {
+        padding: 1.5rem !important;
+    }
+    .feature-card-enhanced h3 {
+        font-size: 1.3rem;
+    }
+    .feature-card-enhanced .icon-wrapper {
+        width: 60px;
+        height: 60px;
+    }
+    .feature-card-enhanced .feature-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .template-card img {
+        height: 250px;
+    }
+
+    .testimonial-card {
+        padding: 1.5rem !important;
+    }
+    .testimonial-card .lead {
+        font-size: 1rem;
+    }
+}
+
+/* Ensure body padding for fixed header if used */
+body {
+    padding-top: 0; /* Managed by JS for dynamic header height */
+}

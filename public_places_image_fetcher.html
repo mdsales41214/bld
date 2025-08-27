@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏛️ Public Places Visual Fetcher</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        h1 {
+            background: linear-gradient(135deg, #3B82F6, #06B6D4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        
+        .source-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .tab {
+            background: rgba(59, 130, 246, 0.1);
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            color: #3B82F6;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .tab.active {
+            background: linear-gradient(135deg, #3B82F6, #06B6D4);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+            align-items: end;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        label {
+            font-weight: 600;
+            color: #374151;
+            font-size: 14px;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #3B82F6, #06B6D4);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+        
+        select, input {
+            padding: 12px 16px;
+            border: 2px solid rgba(59, 130, 246, 0.2);
+            border-radius: 12px;
+            font-size: 14px;
+            background: white;
+        }
+        
+        .images-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+        
+        .image-card {
+            background: white;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-top: 4px solid #3B82F6;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            position: relative;
+        }
+        
+        .image-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(59, 130, 246, 0.2);
+        }
+        
+        .image-preview {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .image-info {
+            padding: 16px;
+        }
+        
+        .image-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #1F2937;
+        }
+        
+        .image-source {
+            font-size: 12px;
+            color: #6B7280;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .image-location {
+            background: #EEF2FF;
+            color: #3730A3;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #059669, #047857);
+            font-size: 12px;
+            padding: 8px 16px;
+            margin: 4px;
+            border-radius: 8px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .status {
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 14px;
+        }
+        
+        .status.success {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            color: #065f46;
+            border: 1px solid #10b981;
+        }
+        
+        .status.error {
+            background: linear-gradient(135deg, #fee2e2, #fca5a5);
+            color: #991b1b;
+            border: 1px solid #ef4444;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #6b7280;
+            font-style: italic;
+            padding: 40px;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 12px 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3B82F6;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6B7280;
+        }
+        
+        .filters {
+            background: #F8FAFC;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏛️ Public Places Visual Fetcher</h1>
+        
+        <div class="source-tabs">
+            <div class="tab active" data-source="unsplash">📸 Unsplash</div>
+            <div class="tab" data-source="pexels">🎨 Pexels</div>
+            <div class="tab" data-source="wikimedia">📚 Wikimedia</div>
+            <div class="tab" data-source="streetview">🗺️ Street View</div>
+            <div class="tab" data-source="nasa">🚀 NASA</div>
+            <div class="tab" data-source="archive">🏛️ Archives</div>
+        </div>
+        
+        <div class="filters">
+            <div class="controls">
+                <div class="control-group">
+                    <label for="locationSearch">Location/Place</label>
+                    <input type="text" id="locationSearch" placeholder="e.g., Paris, Times Square, Central Park" value="New York">
+                </div>
+                <div class="control-group">
+                    <label for="categorySelect">Category</label>
+                    <select id="categorySelect">
+                        <option value="">All Categories</option>
+                        <option value="architecture">Architecture</option>
+                        <option value="landmarks">Landmarks</option>
+                        <option value="parks">Parks & Nature</option>
+                        <option value="streets">Streets & Urban</option>
+                        <option value="museums">Museums</option>
+                        <option value="government">Government Buildings</option>
+                        <option value="historical">Historical Sites</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="imageCount">Number of Images</label>
+                    <input type="number" id="imageCount" value="12" min="1" max="50">
+                </div>
+                <div class="control-group">
+                    <label for="orientation">Orientation</label>
+                    <select id="orientation">
+                        <option value="">Any</option>
+                        <option value="landscape">Landscape</option>
+                        <option value="portrait">Portrait</option>
+                        <option value="square">Square</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>&nbsp;</label>
+                    <button onclick="fetchPublicImages()" id="fetchBtn">🔍 Find Images</button>
+                </div>
+                <div class="control-group">
+                    <label>&nbsp;</label>
+                    <button onclick="downloadCollection()">💾 Download All</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stats" id="stats"></div>
+        <div id="status"></div>
+        <div id="imagesContainer"></div>
+    </div>
+
+    <script>
+        // Public image sources configuration
+        const imageSources = {
+            unsplash: {
+                name: 'Unsplash',
+                baseUrl: 'https://api.unsplash.com/search/photos',
+                // Note: Requires API key for real implementation
+                demo: true
+            },
+            pexels: {
+                name: 'Pexels',
+                baseUrl: 'https://api.pexels.com/v1/search',
+                demo: true
+            },
+            wikimedia: {
+                name: 'Wikimedia Commons',
+                baseUrl: 'https://commons.wikimedia.org/w/api.php',
+                demo: true
+            },
+            streetview: {
+                name: 'Street View',
+                baseUrl: 'https://maps.googleapis.com/maps/api/streetview',
+                demo: true
+            },
+            nasa: {
+                name: 'NASA Image Gallery',
+                baseUrl: 'https://images-api.nasa.gov/search',
+                demo: true
+            },
+            archive: {
+                name: 'Public Archives',
+                baseUrl: 'https://www.loc.gov/pictures/api',
+                demo: true
+            }
+        };
+
+        let currentSource = 'unsplash';
+        let fetchedImages = [];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setupTabs();
+            showStats();
+        });
+
+        function setupTabs() {
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    currentSource = tab.dataset.source;
+                    showStats();
+                });
+            });
+        }
+
+        function showStats() {
+            const statsDiv = document.getElementById('stats');
+            const source = imageSources[currentSource];
+            
+            statsDiv.innerHTML = `
+                <div class="stat-item">
+                    <div class="stat-number">${Object.keys(imageSources).length}</div>
+                    <div class="stat-label">Sources Available</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">${fetchedImages.length}</div>
+                    <div class="stat-label">Images Fetched</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">${source.name}</div>
+                    <div class="stat-label">Current Source</div>
+                </div>
+            `;
+        }
+
+        function showStatus(message, type = 'success') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = `<div class="status ${type}">${message}</div>`;
+            
+            if (type === 'success') {
+                setTimeout(() => statusDiv.innerHTML = '', 4000);
+            }
+        }
+
+        async function fetchPublicImages() {
+            const location = document.getElementById('locationSearch').value;
+            const category = document.getElementById('categorySelect').value;
+            const count = parseInt(document.getElementById('imageCount').value) || 12;
+            const orientation = document.getElementById('orientation').value;
+            
+            if (!location.trim()) {
+                showStatus('❌ Please enter a location to search for', 'error');
+                return;
+            }
+            
+            showStatus(`🔄 Searching for ${count} images of "${location}" from ${imageSources[currentSource].name}...`, 'success');
+            document.getElementById('imagesContainer').innerHTML = '<div class="loading">Loading public images...</div>';
+            
+            try {
+                let images = [];
+                
+                // Demo implementation with sample data
+                // In real implementation, you'd call the actual APIs
+                images = await generateSampleImages(location, category, count, orientation);
+                
+                fetchedImages = images;
+                displayImages(images);
+                showStats();
+                showStatus(`✅ Found ${images.length} public images for "${location}"!`);
+                
+            } catch (error) {
+                showStatus(`❌ Error fetching images: ${error.message}`, 'error');
+                document.getElementById('imagesContainer').innerHTML = '';
+            }
+        }
+
+        async function generateSampleImages(location, category, count, orientation) {
+            // Demo function - replace with actual API calls in real implementation
+            const images = [];
+            const sampleLocations = ['Paris', 'New York', 'London', 'Tokyo', 'Rome'];
+            const sampleTitles = [
+                'Historic Architecture',
+                'City Landmark',
+                'Public Square',
+                'Government Building',
+                'Cultural Monument',
+                'Urban Landscape',
+                'Public Park',
+                'Street Scene'
+            ];
+            
+            for (let i = 0; i < count; i++) {
+                const randomId = Math.floor(Math.random() * 1000);
+                const title = sampleTitles[i % sampleTitles.length];
+                
+                images.push({
+                    id: `${currentSource}_${randomId}`,
+                    title: `${title} in ${location}`,
+                    location: location,
+                    source: imageSources[currentSource].name,
+                    url: `https://picsum.photos/400/300?random=${randomId}`,
+                    downloadUrl: `https://picsum.photos/800/600?random=${randomId}`,
+                    description: `Public domain image of ${location} from ${imageSources[currentSource].name}`,
+                    category: category || 'general',
+                    photographer: 'Public Domain',
+                    license: 'Public Domain / CC0'
+                });
+            }
+            
+            return images;
+        }
+
+        function displayImages(images) {
+            const container = document.getElementById('imagesContainer');
+            const grid = document.createElement('div');
+            grid.className = 'images-grid';
+            
+            images.forEach(image => {
+                const card = document.createElement('div');
+                card.className = 'image-card';
+                
+                card.innerHTML = `
+                    <img src="${image.url}" alt="${image.title}" class="image-preview" loading="lazy">
+                    <div class="image-info">
+                        <div class="image-title">${image.title}</div>
+                        <div class="image-source">${image.source}</div>
+                        <div class="image-location">📍 ${image.location}</div>
+                        <div style="font-size: 12px; color: #6B7280; margin-bottom: 12px;">${image.license}</div>
+                        <button class="copy-btn" onclick="copyToClipboard('${image.url}')">📋 Copy URL</button>
+                        <button class="copy-btn" onclick="downloadImage('${image.downloadUrl}', '${image.title}')">⬇️ Download</button>
+                        <button class="copy-btn" onclick="viewImageDetails('${image.id}')">ℹ️ Details</button>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+            
+            container.innerHTML = '';
+            container.appendChild(grid);
+        }
+
+        async function downloadImage(url, title) {
+            try {
+                const response = await fetch(url);
+                const blob = await response.blob();
+                const downloadUrl = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = downloadUrl;
+                a.download = `${title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.jpg`;
+                a.click();
+                
+                URL.revokeObjectURL(downloadUrl);
+                showStatus(`📥 Downloaded: ${title}`);
+            } catch (error) {
+                showStatus(`❌ Download failed: ${error.message}`, 'error');
+            }
+        }
+
+        function downloadCollection() {
+            if (fetchedImages.length === 0) {
+                showStatus('❌ No images to download!', 'error');
+                return;
+            }
+            
+            const data = {
+                timestamp: new Date().toISOString(),
+                source: currentSource,
+                location: document.getElementById('locationSearch').value,
+                images: fetchedImages
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `public-images-${currentSource}-${Date.now()}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showStatus('✅ Image collection metadata saved!');
+        }
+
+        function viewImageDetails(imageId) {
+            const image = fetchedImages.find(img => img.id === imageId);
+            if (image) {
+                alert(`
+Image Details:
+Title: ${image.title}
+Location: ${image.location}
+Source: ${image.source}
+License: ${image.license}
+Category: ${image.category}
+Description: ${image.description}
+                `.trim());
+            }
+        }
+
+        async function copyToClipboard(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                showStatus(`📋 URL copied to clipboard!`);
+            } catch (error) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showStatus(`📋 URL copied to clipboard!`);
+            }
+        }
+
+        // Real API implementation examples (commented out - requires API keys)
+        /*
+        async function fetchUnsplashImages(query, count) {
+            const response = await fetch(`https://api.unsplash.com/search/photos?query=${query}&per_page=${count}`, {
+                headers: {
+                    'Authorization': 'Client-ID YOUR_UNSPLASH_ACCESS_KEY'
+                }
+            });
+            const data = await response.json();
+            return data.results.map(photo => ({
+                id: photo.id,
+                title: photo.description || photo.alt_description,
+                url: photo.urls.regular,
+                downloadUrl: photo.urls.full,
+                source: 'Unsplash',
+                photographer: photo.user.name,
+                license: 'Unsplash License'
+            }));
+        }
+
+        async function fetchWikimediaImages(query, count) {
+            const response = await fetch(`https://commons.wikimedia.org/w/api.php?action=query&format=json&generator=search&gsrnamespace=6&gsrlimit=${count}&gsrsearch=${query}&prop=imageinfo&iiprop=url|size|mime&origin=*`);
+            const data = await response.json();
+            // Process Wikimedia response...
+        }
+        */
+    </script>
+</body>
+</html>

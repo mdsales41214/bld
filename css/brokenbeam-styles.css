@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@300;400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+.beam-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(ellipse at center, #0a0a0f 0%, #000000 100%);
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.data-stream {
+    position: absolute;
+    top: 50%;
+    left: -200px;
+    width: calc(100vw + 400px);
+    height: 8px;
+    transform: translateY(-50%);
+    filter: blur(0px);
+}
+
+.beam-core {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%,
+        #00d4ff 20%,
+        #0099cc 40%,
+        #00ffff 60%,
+        #0099cc 80%,
+        transparent 100%);
+    transform: translateY(-50%);
+    box-shadow: 
+        0 0 10px #00d4ff,
+        0 0 20px #00a3cc,
+        0 0 30px #0088aa;
+    animation: coreFlow 24s linear infinite;
+}
+
+.beam-glow {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        transparent 0%,
+        rgba(0, 212, 255, 0.6) 20%,
+        rgba(0, 153, 204, 0.8) 40%,
+        rgba(0, 255, 255, 0.7) 60%,
+        rgba(0, 153, 204, 0.6) 80%,
+        transparent 100%);
+    transform: translateY(-50%);
+    filter: blur(2px);
+    animation: glowFlow 24s linear infinite;
+}
+
+.beam-outer-glow {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 12px;
+    background: linear-gradient(90deg, 
+        transparent 0%,
+        rgba(0, 212, 255, 0.3) 25%,
+        rgba(0, 153, 204, 0.4) 50%,
+        rgba(0, 212, 255, 0.3) 75%,
+        transparent 100%);
+    transform: translateY(-50%);
+    filter: blur(6px);
+    animation: outerGlowFlow 24s linear infinite;
+}
+
+.flow-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #00d4ff;
+    border-radius: 50%;
+    box-shadow: 
+        0 0 6px #00d4ff,
+        0 0 12px #00a3cc;
+    animation: particleFlow 18s linear infinite;
+}
+
+.particle::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 5px;
+    height: 5px;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.8) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(1px);
+}
+
+/* Keyframe Animations */
+@keyframes coreFlow {
+    0% {
+        transform: translateY(-50%) translateX(-100px);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50%) translateX(100px);
+        opacity: 0;
+    }
+}
+
+@keyframes glowFlow {
+    0% {
+        transform: translateY(-50%) translateX(-120px);
+        opacity: 0;
+    }
+    15% {
+        opacity: 0.8;
+    }
+    85% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-50%) translateX(120px);
+        opacity: 0;
+    }
+}
+
+@keyframes outerGlowFlow {
+    0% {
+        transform: translateY(-50%) translateX(-150px);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.6;
+    }
+    80% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-50%) translateX(150px);
+        opacity: 0;
+    }
+}
+
+@keyframes particleFlow {
+    0% {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(calc(100vw + 50px));
+        opacity: 0;
+    }
+}
+
+/* Direction variants */
+.beam-container.reverse .data-stream {
+    animation-direction: reverse;
+}
+
+.beam-container.reverse .beam-core {
+    animation-direction: reverse;
+}
+
+.beam-container.reverse .beam-glow {
+    animation-direction: reverse;
+}
+
+.beam-container.reverse .beam-outer-glow {
+    animation-direction: reverse;
+}
+
+.beam-container.reverse .particle {
+    animation-direction: reverse;
+}
+
+/* Responsive adjustments */
+@media (max-width: 150px) {
+    .data-stream {
+        height: 2px;
+    }
+    
+    .beam-core {
+        height: 1.0px;
+    }
+    
+    .beam-glow {
+        height: 3px;
+    }
+    
+    .beam-outer-glow {
+        height: 9px;
+    }
+}
+
+/* Subtle pulsing effect */
+@keyframes subtlePulse {
+    0%, 100% {
+        filter: brightness(1) saturate(1);
+    }
+    50% {
+        filter: brightness(1.1) saturate(1.2);
+    }
+}
+
+.data-stream {
+    animation: subtlePulse 6s ease-in-out infinite;
+}
+
+.beam-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: scale(0.2);               /* Scale 1/5 size */
+  transform-origin: top left;         /* Anchor scaling at top/left */
+  width: calc(100% / 0.2);            /* Compensate width */
+  height: calc(100% / 0.2);           /* Compensate height */
+}
+.beam-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: scale(0.2);               /* Scale 1/5 size */
+  transform-origin: top left;         /* Anchor scaling at top/left */
+  width: calc(100% / 0.2);            /* Compensate width */
+  height: calc(100% / 0.2);           /* Compensate height */
+}
+
